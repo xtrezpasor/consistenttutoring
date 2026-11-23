@@ -44,3 +44,13 @@ test('all booking CTAs point to #book', () => {
   assert.ok(count(/href="#book"/g) >= 2);
 });
 test('no hard-coded turnaround', () => assert.doesNotMatch(html, /within \d+ days/i));
+
+// Task 3: Cal.com embed
+test('cal.com embed loader present', () => {
+  assert.match(html, /https:\/\/app\.cal\.com\/embed\/embed\.js/);
+  assert.match(html, /Cal\("init",\s*service/);
+});
+test('embed themed with site green', () => {
+  assert.match(html, /"cal-brand":\s*"#2f5d50"/);
+  assert.match(html, /"cal-brand":\s*"#8cc1ab"/);
+});

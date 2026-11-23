@@ -356,6 +356,32 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
 </footer>
 
 <script>
+// Cal.com embed loader (official snippet): defines window.Cal and loads embed.js
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+
+(function () {
+  const theme = document.documentElement.dataset.theme || 'auto';
+  const mount = (service) => {
+    const el = document.getElementById('cal-' + service);
+    if (!el || el.dataset.mounted) return;
+    Cal("init", service, { origin: "https://app.cal.com" });
+    Cal.ns[service]("inline", { elementOrSelector: el, calLink: el.dataset.calLink, config: { layout: "month_view", theme } });
+    Cal.ns[service]("ui", {
+      cssVarsPerTheme: { light: { "cal-brand": "#2f5d50" }, dark: { "cal-brand": "#8cc1ab" } },
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+    el.dataset.mounted = "1";
+  };
+  const select = (service) => {
+    document.querySelectorAll('.svc-choice').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.service === service)));
+    document.querySelectorAll('.cal-pane').forEach((p) => { p.hidden = p.dataset.pane !== service; });
+    mount(service);
+  };
+  document.querySelectorAll('.svc-choice').forEach((b) => b.addEventListener('click', () => select(b.dataset.service)));
+  mount('one-on-one');
+})();
+
 document.getElementById('copyBtn').addEventListener('click', async (e) => {
   const btn = e.currentTarget;
   try {
