@@ -3,6 +3,8 @@
   "compatibility_date": "2026-11-23",
   "assets": { "directory": "./public" },
   "routes": [
+    { "pattern": "www.consistenttutoring.com", "custom_domain": true },
+    { "pattern": "consistenttutoring.com", "custom_domain": true },
     { "pattern": "test.consistenttutoring.com", "custom_domain": true }
   ]
 }
