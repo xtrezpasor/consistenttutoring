@@ -121,9 +121,9 @@ section { padding: 84px 0; }
 .step-title { font-family: var(--display); font-size: 1.6rem; font-weight: 700; line-height: 1.1; }
 .step-body > span:not(.step-title) { color: var(--muted); font-size: .97rem; }
 .choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.svc-choice { position: relative; text-align: left; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; cursor: pointer; display: grid; gap: 6px; }
+.svc-choice { position: relative; text-align: left; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 48px 18px 20px; cursor: pointer; display: grid; gap: 6px; }
 .svc-choice:hover { border-color: var(--pen); }
-.svc-choice[aria-pressed="true"] { border: 2px solid var(--pen); padding: 17px 19px; background: var(--sheet); }
+.svc-choice[aria-pressed="true"] { border: 2px solid var(--pen); padding: 17px 47px 17px 19px; background: var(--sheet); }
 .svc-choice[aria-pressed="true"]::after { content: "✓"; position: absolute; top: 14px; right: 16px; width: 26px; height: 26px; border-radius: 50%; background: var(--pen); color: var(--on-pen); display: grid; place-items: center; font-size: .85rem; font-weight: 700; }
 .svc-choice b { font-family: var(--display); font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
 .svc-choice .price { font-size: 1.8rem; }
@@ -132,6 +132,7 @@ section { padding: 84px 0; }
 .cal-pane[hidden] { display: none; }
 .cal-embed { min-height: 560px; width: 100%; overflow: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
 .cal-help { font-size: .88rem; color: var(--muted); }
+.cal-embed:empty { min-height: 0; border: 0; }
 .book-note { font-size: .95rem; color: var(--muted); padding: 12px 16px; border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; font-style: italic; }
 
 /* FAQ */
@@ -299,13 +300,13 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
         <div class="step-body">
           <span class="step-title">Pick a time &amp; pay</span>
           <div class="cal-pane" data-pane="one-on-one">
-            <div class="cal-embed" id="cal-one-on-one" data-cal-link="elizabeth-nolan-audvfc/one-on-one"></div>
             <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/one-on-one" target="_blank" rel="noopener">Open the booking page</a></p>
+            <div class="cal-embed" id="cal-one-on-one" data-cal-link="elizabeth-nolan-audvfc/one-on-one"></div>
           </div>
           <div class="cal-pane" data-pane="essayreview" hidden>
             <p class="book-note">When you book, you'll add a link to your Google Doc (shared with comment access) or paste your essay. Your call is scheduled for after your written notes are ready.</p>
-            <div class="cal-embed" id="cal-essayreview" data-cal-link="elizabeth-nolan-audvfc/essayreview"></div>
             <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/essayreview" target="_blank" rel="noopener">Open the booking page</a></p>
+            <div class="cal-embed" id="cal-essayreview" data-cal-link="elizabeth-nolan-audvfc/essayreview"></div>
           </div>
         </div>
       </li>

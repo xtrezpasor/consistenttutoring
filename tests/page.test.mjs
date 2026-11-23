@@ -70,3 +70,17 @@ test('contact is for questions, not booking', () => {
 test('step titles are not overridden by the muted step text rule', () => {
   assert.doesNotMatch(html, /\.step-body > span\s*\{/);
 });
+
+// Final review fixes
+test('fallback help line appears above each calendar box', () => {
+  for (const svc of ['one-on-one', 'essayreview']) {
+    const pane = html.match(new RegExp(`data-pane="${svc}"[\\s\\S]*?</div>\\s*</div>|data-pane="${svc}"[\\s\\S]*?class="cal-embed"`))[0];
+    assert.ok(pane.indexOf('cal-help') !== -1 && pane.indexOf('cal-help') < pane.indexOf('class="cal-embed"'), svc);
+  }
+});
+test('empty calendar box collapses until the embed loads', () =>
+  assert.match(html, /\.cal-embed:empty\s*\{[^}]*min-height:\s*0/));
+test('service cards reserve room for the check badge', () => {
+  assert.match(html, /\.svc-choice \{[^}]*padding: 18px 48px 18px 20px/);
+  assert.match(html, /\.svc-choice\[aria-pressed="true"\] \{[^}]*padding: 17px 47px 17px 19px/);
+});
