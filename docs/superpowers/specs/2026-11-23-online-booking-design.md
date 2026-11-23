@@ -12,7 +12,7 @@ it's not pricey.
 ## Goals
 
 - Parents can book and pay for either service from the site in one sitting.
-- Open times come from Liz's Google Calendar automatically (no double-booking).
+- Open times come from Liz's iCloud (Apple) Calendar automatically (no double-booking).
 - Essay Review collects the essay at booking time.
 - Liz controls the Essay Review turnaround herself, without editing the website.
 
@@ -77,7 +77,7 @@ Small print: reschedule/cancel from your confirmation email, 24 hours' notice.
 
 ### Turnaround (Liz-controlled, in Cal.com)
 
-- Essay Review event → **Limits → Minimum notice** = Liz's turnaround (e.g. 3 days).
+- Essay Review link → **Limits & buffers → Minimum notice** = Liz's turnaround (e.g. 3 days).
   The calendar then only offers call times after her notes will be ready.
 - Optional: **Limit booking frequency** (e.g. max N reviews/week) to prevent overload.
 - Site copy says "your call is booked for after your written notes are ready" —
@@ -85,10 +85,10 @@ Small print: reschedule/cancel from your confirmation email, 24 hours' notice.
 
 ### Cal.com setup checklist (done by Liz/owner in Cal.com dashboard)
 
-1. Connect Google Calendar (availability + conflict checking).
+1. Connect Apple (iCloud) Calendar: Settings → Calendars → Add calendar → Apple Calendar; sign in with Apple ID email + an app-specific password from appleid.apple.com → Sign-In and Security → App-Specific Passwords. Pick which calendars block time and which receives bookings.
 2. Install Stripe app; connect Stripe account.
 3. One-on-One: 60 min, $100, location Zoom (or Google Meet).
-4. Essay Review: 30 min call, $150, Zoom; minimum notice = turnaround.
+4. Essay Review: 30 min call, $150, Zoom; Links → Essay Review → **Limits & buffers** → Minimum notice = turnaround (days).
 5. Essay Review booking questions: **Essay link** (URL, required) with helper text
    "Google Doc shared with comment access"; **Or paste your essay** (long text,
    optional); **Which prompt / college?** (short text, optional).
