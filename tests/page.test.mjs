@@ -65,3 +65,8 @@ test('contact is for questions, not booking', () => {
   assert.match(html, /href="mailto:Liz@consistentholding\.com"/);
   assert.match(html, /href="sms:\+16314128329"/);
 });
+
+// Task 5: found in browser check
+test('step titles are not overridden by the muted step text rule', () => {
+  assert.doesNotMatch(html, /\.step-body > span\s*\{/);
+});
