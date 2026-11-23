@@ -54,3 +54,14 @@ test('embed themed with site green', () => {
   assert.match(html, /"cal-brand":\s*"#2f5d50"/);
   assert.match(html, /"cal-brand":\s*"#8cc1ab"/);
 });
+
+// Task 4: copy
+test('FAQ covers payment and review timing', () => {
+  assert.match(html, /<summary>How do I pay\?<\/summary>/);
+  assert.match(html, /<summary>How fast is an essay review\?<\/summary>/);
+});
+test('contact is for questions, not booking', () => {
+  assert.match(html, /<section id="contact"[\s\S]*<h2>Questions\? Get in touch<\/h2>/);
+  assert.match(html, /href="mailto:Liz@consistentholding\.com"/);
+  assert.match(html, /href="sms:\+16314128329"/);
+});
