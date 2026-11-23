@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consistent Tutoring: Winter Essay Help</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a well-made book. Ivory pages, library-green ink, antique gold ornaments, chapter headings. */
+:root {
+  --paper: #f7f4ec;
+  --sheet: #fffdf8;
+  --ink: #1f2a24;
+  --muted: #5d625b;
+  --rule: #ddd5c4;
+  --pen: #2f5d50;
+  --pen-soft: #e9efe8;
+  --on-pen: #fffdf8;
+  --gold: #a07c34;
+  --display: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --body: "Crimson Pro", "Georgia", "Times New Roman", serif;
+  --hand: "Crimson Pro", "Georgia", serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141a17; --sheet: #1b2420; --ink: #ece6d8; --muted: #a9ab9f;
+    --rule: #33403a; --pen: #8cc1ab; --pen-soft: #22312b; --on-pen: #141a17; --gold: #c9a85a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141a17; --sheet: #1b2420; --ink: #ece6d8; --muted: #a9ab9f;
+  --rule: #33403a; --pen: #8cc1ab; --pen-soft: #22312b; --on-pen: #141a17; --gold: #c9a85a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 19px; line-height: 1.6; }
+a { color: var(--pen); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--pen); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: 0; text-wrap: balance; line-height: 1.08; margin: 0; }
+h2 { font-size: clamp(2.3rem, 5vw, 3.3rem); }
+h3 { font-size: 1.6rem; font-weight: 700; }
+p { margin: 0; }
+.hand { font-family: var(--hand); color: var(--pen); font-weight: 700; }
+.eyebrow { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: var(--gold); }
+
+/* Nav */
+nav { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 5; }
+nav .wrap { display: flex; align-items: center; justify-content: center; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
+.masthead { text-align: center; padding: 48px 0 30px; background: var(--paper); }
+.brand { font-family: var(--display); font-weight: 700; font-size: clamp(3.4rem, 12vw, 7rem); line-height: .95; letter-spacing: .01em; color: var(--ink); }
+.mast-rule { display: flex; align-items: center; gap: 16px; max-width: 420px; margin: 18px auto 12px; color: var(--gold); font-size: 1.5rem; }
+.mast-rule::before, .mast-rule::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .7; }
+.mast-tag { font-size: .9rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; font-size: .92rem; font-weight: 500; }
+nav ul a { color: var(--ink); text-decoration: none; }
+nav ul a:hover { color: var(--pen); }
+
+/* Hero */
+.hero { padding: 56px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(3rem, 7.5vw, 5.2rem); font-weight: 500; }
+.strike { position: relative; color: var(--muted); }
+.strike::after { content: ""; position: absolute; left: -4%; right: -4%; top: 54%; height: 4px; background: var(--pen); transform: rotate(-3deg); border-radius: 2px; }
+.caret { position: relative; }
+.caret .ins { position: absolute; left: 0; top: -1.05em; font-family: var(--hand); color: var(--pen); font-size: .5em; white-space: nowrap; transform: rotate(-4deg); }
+.hero .lede { margin-top: 26px; font-size: 1.2rem; max-width: 34ch; color: var(--muted); }
+.cta-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 13px 22px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: .98rem; }
+.btn-pen { background: var(--pen); color: var(--on-pen); }
+.btn-line { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn:hover { transform: translateY(-1px); }
+
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 4px; padding: 28px 28px 28px 54px; position: relative; box-shadow: 0 18px 40px -24px rgba(20,30,50,.35); transform: rotate(1.2deg); }
+.sheet::before { content: ""; position: absolute; left: 36px; top: 0; bottom: 0; width: 1.5px; background: var(--pen); opacity: .45; }
+.sheet .counter { font-variant-numeric: tabular-nums; font-size: .78rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+.sheet p.draft { font-family: var(--body); font-size: 1.2rem; line-height: 1.55; }
+.sheet mark { background: var(--pen-soft); color: inherit; padding: 0 2px; }
+.sheet .note { margin-top: 14px; font-family: var(--body); font-style: italic; color: var(--pen); font-size: 1.1rem; line-height: 1.4; }
+
+/* Credentials */
+.creds { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--sheet); }
+.about { display: grid; grid-template-columns: 240px 1fr; gap: 44px; padding-top: 44px; padding-bottom: 36px; align-items: center; }
+.about-side { display: grid; gap: 14px; justify-items: center; text-align: center; }
+.portrait { width: 100%; max-width: 240px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 50% / 50%; border: 3px solid var(--gold); padding: 5px; background: var(--sheet); }
+.about-text { font-size: 1.1rem; max-width: 62ch; display: grid; gap: 14px; }
+.about-lead { font-family: var(--display); font-weight: 600; font-size: clamp(1.8rem, 3.8vw, 2.4rem); line-height: 1.15; color: var(--pen); text-wrap: balance; }
+.about-text p:nth-child(2)::first-letter { float: left; font-family: var(--display); font-weight: 700; font-size: 3.6em; line-height: .8; padding: 6px 10px 0 0; color: var(--gold); }
+.fleuron { text-align: center; color: var(--gold); font-size: 1.6rem; padding: 6px 0 22px; }
+main { counter-reset: chapter; }
+.section-head h2::before { counter-increment: chapter; content: "Chapter " counter(chapter, upper-roman); display: block; font-family: var(--body); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+.cred { padding: 26px 20px; border-left: 1px solid var(--rule); }
+.cred:first-child { border-left: 0; padding-left: 0; }
+.cred b { display: block; font-family: var(--display); font-weight: 800; font-size: 2.1rem; color: var(--pen); line-height: 1; font-variant-numeric: tabular-nums; }
+.cred span { font-size: .9rem; color: var(--muted); }
+
+section { padding: 84px 0; }
+.section-head { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: end; margin-bottom: 44px; }
+.section-head p { color: var(--muted); max-width: 52ch; }
+
+.now { padding: 64px 0; background: var(--pen-soft); border-bottom: 1px solid var(--rule); }
+.now-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.now-lead { margin-top: 16px; color: var(--muted); font-size: 1.1rem; max-width: 44ch; }
+.now-card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.now-card ul { margin: 0; padding-left: 18px; font-size: .97rem; }
+.now-card li { margin: 4px 0; }
+.now-note { font-size: .88rem; color: var(--muted); }
+
+/* Programs */
+.programs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.prog { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.prog.feature { border: 2px solid var(--pen); }
+.prog-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.price { font-family: var(--display); font-weight: 700; font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--body); font-size: .85rem; color: var(--muted); }
+.tag { display: inline-block; font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 99px; background: var(--pen-soft); color: var(--pen); }
+.meta { display: flex; gap: 8px 18px; flex-wrap: wrap; font-size: .88rem; color: var(--muted); }
+.meta span::before { content: "— "; color: var(--pen); }
+.prog ul { margin: 0; padding-left: 18px; font-size: .95rem; }
+.prog ul li { margin: 3px 0; }
+.addon { margin-top: 22px; padding: 18px 22px; border: 1px dashed var(--rule); border-radius: 6px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; background: var(--sheet); }
+
+/* Session plan */
+.plan { background: var(--sheet); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.steps li::before { content: counter(s, upper-roman) "."; font-family: var(--display); font-weight: 700; color: var(--gold); font-size: 1.5rem; line-height: 1.1; }
+.steps b { display: block; font-weight: 600; }
+.steps span { color: var(--muted); font-size: .93rem; }
+
+/* Calendar */
+.timeline { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 2px solid var(--ink); }
+.tl { padding: 18px 16px 0 0; position: relative; }
+.tl::before { content: ""; position: absolute; top: -8px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.tl.off::before { background: var(--pen); border-color: var(--pen); }
+.tl .when { font-weight: 700; font-size: .95rem; margin-top: 6px; }
+.tl p { font-size: .9rem; color: var(--muted); margin-top: 6px; }
+
+/* Booking */
+.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.book-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.book-steps li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+.num { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--pen); color: var(--pen); display: grid; place-items: center; font-weight: 700; font-size: .9rem; }
+.early { background: var(--pen); color: var(--on-pen); border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+.early h3 { color: var(--on-pen); }
+.pay { margin-top: 28px; padding: 18px 20px; background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--pen); border-radius: 6px; display: grid; gap: 6px; }
+.pay p { color: var(--muted); font-size: .95rem; }
+.policies { margin-top: 20px; font-size: .9rem; color: var(--muted); display: grid; gap: 6px; }
+
+/* FAQ */
+.faq { display: grid; gap: 0; max-width: 780px; }
+details { border-bottom: 1px solid var(--rule); padding: 18px 0; }
+summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--pen); font-size: 1.4rem; line-height: 1; }
+details[open] summary::after { content: "–"; }
+details p { margin-top: 10px; color: var(--muted); max-width: 65ch; }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--paper); }
+.contact h2 { color: var(--paper); }
+.contact .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+.contact p { color: var(--paper); opacity: .8; margin-top: 14px; max-width: 46ch; }
+.contact-card { border: 1px solid rgba(255,255,255,.25); border-radius: 6px; padding: 24px; display: grid; gap: 12px; }
+.contact-card .label { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+.contact-card .val { font-size: 1.1rem; font-weight: 600; word-break: break-word; }
+.copy { background: transparent; border: 1px solid rgba(255,255,255,.45); color: inherit; padding: 8px 14px; border-radius: 6px; font: inherit; font-size: .88rem; cursor: pointer; justify-self: start; }
+:root[data-theme="dark"] .contact, :root[data-theme="dark"] .contact h2 { color: var(--ink); }
+:root[data-theme="dark"] .contact { background: var(--sheet); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .contact { background: var(--sheet); color: var(--ink); } :root:not([data-theme="light"]) .contact h2 { color: var(--ink); } }
+footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .hero-grid, .section-head, .book-grid, .contact .wrap, .now-grid { grid-template-columns: 1fr; }
+  .sheet { transform: none; }
+  .about { grid-template-columns: 1fr; gap: 20px; }
+  .portrait { max-width: 200px; }
+  .programs, .steps { grid-template-columns: 1fr; }
+  .timeline { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--ink); }
+  .tl { padding: 0 0 22px 22px; }
+  .tl::before { top: 2px; left: -8px; }
+  nav ul { gap: 14px; }
+}
+@media (max-width: 420px) { .wrap { padding: 0 16px; } .sheet { padding: 22px 18px 22px 40px; } .sheet::before { left: 26px; } }
+
+.svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; counter-reset: h; }
+.how li { counter-increment: h; display: grid; gap: 8px; }
+.how li::before { content: counter(h, upper-roman) "."; font-family: var(--display); font-weight: 700; font-size: 1.8rem; color: var(--gold); line-height: 1; }
+.how b { font-family: var(--display); font-size: 1.4rem; font-weight: 700; }
+.how span { color: var(--muted); font-size: .97rem; }
+.dates { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 22px; font-size: .95rem; color: var(--muted); }
+.dates b { color: var(--ink); }
+@media (max-width: 860px) { .svc, .how { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <h1 class="brand">Consistent Tutoring</h1>
+    <div class="mast-rule" aria-hidden="true"><span>❧</span></div>
+    <p class="mast-tag">College Essay Help for High School Seniors · On Zoom</p>
+  </div>
+</header>
+<nav>
+  <div class="wrap">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#help">Essay help</a></li>
+      <li><a href="index.html#how">How it works</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#contact">Book</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Now booking · through mid-January</p>
+      <h2 style="margin-top:16px;font-size:clamp(2.8rem,7vw,4.8rem);font-weight:500">Your story, told in <em style="color:var(--pen)">650 words or less.</em></h2>
+      <p class="lede">One-on-one help on Zoom for seniors finishing their college essays before regular decision deadlines. Book by the hour, with no package required.</p>
+      <div class="cta-row">
+        <a class="btn btn-pen" href="index.html#contact">Book a session</a>
+        <a class="btn btn-line" href="index.html#help">See options &amp; prices</a>
+      </div>
+    </div>
+    <div class="sheet" aria-label="Example of draft feedback">
+      <div class="counter">Common App · Draft 2 · 712 / 650 words</div>
+      <p class="draft">Ever since I was young, I have always been passionate about helping others. <mark>The summer my grandmother stopped recognizing me, I learned to introduce myself every morning.</mark></p>
+      <p class="note">Start here. Cut the first line, and this is your essay.</p>
+    </div>
+  </div>
+</div>
+
+<div class="creds" id="about">
+  <div class="wrap about">
+    <div class="about-side">
+      <img class="portrait" src="photo.jpg" alt="Liz, founder of Consistent Tutoring" width="480" height="600">
+      <p class="eyebrow">About me</p>
+    </div>
+    <div class="about-text">
+      <p class="about-lead">My favorite part of college essay season is getting to really know my students.</p>
+      <p>Somewhere between the first brainstorm and the final draft, a seventeen-year-old figures out what they actually want to say about who they are. That's when the essay comes alive, and it's when I see them start to believe in the person they're about to become.</p>
+      <p>I've spent 20 years teaching English, including 10 years of AP Literature, where my students' pass rates consistently beat state and global averages. I also teach a course on college applications and scholarship essays. My goal is to help every student walk into the next stage of life confident in their own voice.</p>
+    </div>
+  </div>
+  <div class="fleuron" aria-hidden="true">❧</div>
+</div>
+
+<main>
+<section id="help">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Essay help, by the hour</h2>
+      <p>For students who are close to done, stuck on one essay, or haven't started yet. Come with whatever you have.</p>
+    </div>
+    <div class="svc">
+      <article class="prog feature">
+        <div class="prog-top"><h3>One-on-One Session</h3><span class="tag">Most popular</span></div>
+        <div class="price">$100 <small>/ hour</small></div>
+        <div class="meta"><span>On Zoom</span><span>Book as many as you need</span></div>
+        <ul>
+          <li>Personal statements, "why this college" essays and short answers</li>
+          <li>Finding a topic, fixing structure, cutting to the word limit</li>
+          <li>Working through drafts together, line by line</li>
+          <li>Evenings, weekends and winter break hours</li>
+        </ul>
+      </article>
+      <article class="prog">
+        <div class="prog-top"><h3>Essay Review</h3><span class="tag">Written feedback</span></div>
+        <div class="price">$150 <small>/ essay</small></div>
+        <div class="meta"><span>Detailed comments</span><span>Plus a 30-minute Zoom call</span></div>
+        <ul>
+          <li>Send a finished or nearly finished essay</li>
+          <li>Written comments on content, voice and clarity</li>
+          <li>A 30-minute Zoom call to talk through revisions</li>
+          <li>Returned within 3 days, sooner when deadlines are close</li>
+        </ul>
+      </article>
+    </div>
+    <div class="dates">
+      <span><b>Common deadlines:</b> January 1 and January 15</span>
+      <span><b>Tip:</b> the week before January 1 fills quickly, so book early</span>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="plan">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>Simple and quick, because deadlines don't wait.</p>
+    </div>
+    <ol class="how">
+      <li><b>Email or text me</b><span>Send your student's name, which essays they're working on, their deadlines and a few times that work for you.</span></li>
+      <li><b>Pick a time</b><span>I'll reply within one business day with available times and a Zoom link. Send any drafts ahead of the session.</span></li>
+      <li><b>Pay and meet</b><span>Pay by Zelle before the session, then we get to work.</span></li>
+    </ol>
+    <div class="pay">
+      <b>How to pay</b>
+      <p>Payments are made by Zelle to <span style="font-weight:600;color:var(--ink)">Liz@consistentholding.com</span>. Please put your student's name in the memo (for example, "Emma – 1 hour session"). You'll get a confirmation once your payment arrives.</p>
+    </div>
+    <div class="policies">
+      <span>Rescheduling: give 24 hours' notice. A cancellation with less notice counts as a used session.</span>
+      <span>I don't tutor students from the school where I teach.</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head"><h2>Questions families ask</h2><p></p></div>
+    <div class="faq">
+      <details><summary>Do you write or edit the essay for my student?</summary><p>No. Students write every word. I ask questions that get to what matters and give honest feedback on structure, voice and clarity. Admissions readers can tell when an adult wrote an essay.</p></details>
+      <details><summary>Is it too late to get help?</summary><p>Not at all. Many students make their biggest improvements in the final weeks. Even one session can turn a decent essay into a strong one.</p></details>
+      <details><summary>How many sessions will we need?</summary><p>It depends on how far along your student is. A polished draft may need one session. A student starting from scratch usually needs two or three.</p></details>
+      <details><summary>Are sessions online or in person?</summary><p>All sessions are on Zoom, so students can join from anywhere, even while traveling over winter break. We work in a shared Google Doc so we can look at the draft together and you can see my comments in real time.</p></details>
+      <details><summary>Can you help with scholarship essays too?</summary><p>Yes. I teach a course on college applications and scholarship essays, and sessions can cover those too.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div>
+      <h2>Book a session</h2>
+      <p>Email or text me with your student's grade, the essays they're working on, their deadlines and a few times that work for you. I'll reply within one business day.</p>
+      <p>Have a junior? Ask about summer 2027 coaching for rising seniors.</p>
+    </div>
+    <div class="contact-card">
+      <span class="label">Email</span>
+      <span class="val" id="email">Liz@consistentholding.com</span>
+      <button class="copy" id="copyBtn" type="button">Copy email</button>
+      <span class="label" style="margin-top:8px">Call or text</span>
+      <span class="val"><a href="tel:+16314128329" style="color:inherit;text-decoration:none">(631) 412-8329</a></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Consistent Tutoring · College Essay &amp; AP Literature Coaching · Sessions on Zoom</div>
+</footer>
+
+<script>
+document.getElementById('copyBtn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  try {
+    await navigator.clipboard.writeText(document.getElementById('email').textContent.trim());
+    btn.textContent = 'Copied';
+  } catch (err) {
+    btn.textContent = 'Select the email above to copy it';
+  }
+  setTimeout(() => { btn.textContent = 'Copy email'; }, 2500);
+});
+</script>
+</body>
+</html>
