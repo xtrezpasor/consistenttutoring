@@ -112,11 +112,27 @@ section { padding: 84px 0; }
 .meta span::before { content: "— "; color: var(--pen); }
 .prog ul { margin: 0; padding-left: 18px; font-size: .95rem; }
 .prog ul li { margin: 3px 0; }
-/* Session plan */
+/* Booking */
 .plan { background: var(--sheet); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.pay { margin-top: 28px; padding: 18px 20px; background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--pen); border-radius: 6px; display: grid; gap: 6px; }
-.pay p { color: var(--muted); font-size: .95rem; }
-.policies { margin-top: 20px; font-size: .9rem; color: var(--muted); display: grid; gap: 6px; }
+.book-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px; counter-reset: b; }
+.book-flow > li { counter-increment: b; display: grid; grid-template-columns: 56px 1fr; gap: 16px; min-width: 0; }
+.book-flow > li::before { content: counter(b, upper-roman) "."; font-family: var(--display); font-weight: 700; font-size: 1.8rem; color: var(--gold); line-height: 1; }
+.step-body { display: grid; gap: 14px; min-width: 0; }
+.step-title { font-family: var(--display); font-size: 1.6rem; font-weight: 700; line-height: 1.1; }
+.step-body > span { color: var(--muted); font-size: .97rem; }
+.choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.svc-choice { position: relative; text-align: left; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; cursor: pointer; display: grid; gap: 6px; }
+.svc-choice:hover { border-color: var(--pen); }
+.svc-choice[aria-pressed="true"] { border: 2px solid var(--pen); padding: 17px 19px; background: var(--sheet); }
+.svc-choice[aria-pressed="true"]::after { content: "✓"; position: absolute; top: 14px; right: 16px; width: 26px; height: 26px; border-radius: 50%; background: var(--pen); color: var(--on-pen); display: grid; place-items: center; font-size: .85rem; font-weight: 700; }
+.svc-choice b { font-family: var(--display); font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+.svc-choice .price { font-size: 1.8rem; }
+.svc-choice .desc { color: var(--muted); font-size: .93rem; }
+.cal-pane { display: grid; gap: 10px; min-width: 0; }
+.cal-pane[hidden] { display: none; }
+.cal-embed { min-height: 560px; width: 100%; overflow: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
+.cal-help { font-size: .88rem; color: var(--muted); }
+.book-note { font-size: .95rem; color: var(--muted); padding: 12px 16px; border-left: 3px solid var(--gold); background: var(--paper); border-radius: 0 6px 6px 0; }
 
 /* FAQ */
 .faq { display: grid; gap: 0; max-width: 780px; }
@@ -152,14 +168,14 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
 @media (max-width: 420px) { .wrap { padding: 0 16px; } .sheet { padding: 22px 18px 22px 40px; } .sheet::before { left: 26px; } }
 
 .svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-.how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; counter-reset: h; }
-.how li { counter-increment: h; display: grid; gap: 8px; }
-.how li::before { content: counter(h, upper-roman) "."; font-family: var(--display); font-weight: 700; font-size: 1.8rem; color: var(--gold); line-height: 1; }
-.how b { font-family: var(--display); font-size: 1.4rem; font-weight: 700; }
-.how span { color: var(--muted); font-size: .97rem; }
 .dates { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 22px; font-size: .95rem; color: var(--muted); }
 .dates b { color: var(--ink); }
-@media (max-width: 860px) { .svc, .how { grid-template-columns: 1fr; } }
+@media (max-width: 860px) {
+  .svc { grid-template-columns: 1fr; }
+  .book-flow > li { grid-template-columns: 1fr; gap: 6px; }
+  .cal-embed { min-height: 640px; }
+}
+@media (max-width: 420px) { .choices { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -176,9 +192,9 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#help">Essay help</a></li>
-      <li><a href="#how">How it works</a></li>
+      <li><a href="#book">Book online</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -190,7 +206,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
       <h2 class="hero-title">Your story, told in <em>650 words or less.</em></h2>
       <p class="lede">One-on-one help on Zoom for seniors finishing their college essays before regular decision deadlines. Book by the hour, with no package required.</p>
       <div class="cta-row">
-        <a class="btn btn-pen" href="#contact">Book a session</a>
+        <a class="btn btn-pen" href="#book">Book a session</a>
         <a class="btn btn-line" href="#help">See options &amp; prices</a>
       </div>
     </div>
@@ -244,7 +260,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
           <li>Send a finished or nearly finished essay</li>
           <li>Written comments on content, voice and clarity</li>
           <li>A 30-minute Zoom call to talk through revisions</li>
-          <li>Returned within 3 days, sooner when deadlines are close</li>
+          <li>Notes back before your call; book early near deadlines</li>
         </ul>
       </article>
     </div>
@@ -255,25 +271,52 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
   </div>
 </section>
 
-<section id="how" class="plan">
+<section id="book" class="plan">
   <div class="wrap">
     <div class="section-head">
-      <h2>How it works</h2>
-      <p>Simple and quick, because deadlines don't wait.</p>
+      <h2>Book in three steps</h2>
+      <p>Choose your help, pick a time that works, and pay securely. You'll get a confirmation and Zoom link right away.</p>
     </div>
-    <ol class="how">
-      <li><b>Email or text me</b><span>Send your student's name, which essays they're working on, their deadlines and a few times that work for you.</span></li>
-      <li><b>Pick a time</b><span>I'll reply within one business day with available times and a Zoom link. Send any drafts ahead of the session.</span></li>
-      <li><b>Pay and meet</b><span>Pay by Zelle before the session, then we get to work.</span></li>
+    <ol class="book-flow">
+      <li>
+        <div class="step-body">
+          <span class="step-title">Choose your help</span>
+          <div class="choices" role="group" aria-label="Choose a service">
+            <button class="svc-choice" type="button" data-service="one-on-one" aria-pressed="true">
+              <b>One-on-One Session</b>
+              <span class="price">$100 <small>/ hour</small></span>
+              <span class="desc">Work through drafts together on Zoom</span>
+            </button>
+            <button class="svc-choice" type="button" data-service="essayreview" aria-pressed="false">
+              <b>Essay Review</b>
+              <span class="price">$150 <small>/ essay</small></span>
+              <span class="desc">Written notes on your essay, plus a 30-minute call</span>
+            </button>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <span class="step-title">Pick a time &amp; pay</span>
+          <div class="cal-pane" data-pane="one-on-one">
+            <div class="cal-embed" id="cal-one-on-one" data-cal-link="elizabeth-nolan-audvfc/one-on-one"></div>
+            <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/one-on-one" target="_blank" rel="noopener">Open the booking page</a></p>
+          </div>
+          <div class="cal-pane" data-pane="essayreview" hidden>
+            <p class="book-note">When you book, you'll add a link to your Google Doc (shared with comment access) or paste your essay. Your call is scheduled for after your written notes are ready.</p>
+            <div class="cal-embed" id="cal-essayreview" data-cal-link="elizabeth-nolan-audvfc/essayreview"></div>
+            <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/essayreview" target="_blank" rel="noopener">Open the booking page</a></p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <span class="step-title">You're set</span>
+          <span><b>Check your email.</b> Your confirmation has the Zoom link and a calendar invite. Need to change something? Reschedule or cancel from that email with at least 24 hours' notice; later cancellations count as a used session.</span>
+          <span>I don't tutor students from the school where I teach.</span>
+        </div>
+      </li>
     </ol>
-    <div class="pay">
-      <b>How to pay</b>
-      <p>Payments are made by Zelle to <span style="font-weight:600;color:var(--ink)">Liz@consistentholding.com</span>. Please put your student's name in the memo (for example, "Emma – 1 hour session"). You'll get a confirmation once your payment arrives.</p>
-    </div>
-    <div class="policies">
-      <span>Rescheduling: give 24 hours' notice. A cancellation with less notice counts as a used session.</span>
-      <span>I don't tutor students from the school where I teach.</span>
-    </div>
   </div>
 </section>
 

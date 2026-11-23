@@ -19,3 +19,28 @@ test('dead CSS removed', () => {
   for (const sel of ['.strike', '.caret', '.timeline', '.early', '.addon', '.now-grid', '.cred ', '.book-grid', '.hand ']) assert.ok(!html.includes(sel), sel);
 });
 test('footer does not advertise AP Lit coaching', () => assert.doesNotMatch(html, /AP Literature Coaching/));
+
+// Task 2: Book in three steps
+test('book section replaces how/zelle', () => {
+  assert.match(html, /<section id="book"/);
+  assert.doesNotMatch(html, /id="how"/);
+  assert.doesNotMatch(html, /zelle/i);
+});
+test('service choices are buttons with aria-pressed', () => {
+  assert.equal(count(/<button[^>]*class="svc-choice"[^>]*aria-pressed="(true|false)"/g), 2);
+  assert.match(html, /data-service="one-on-one"[^>]*aria-pressed="true"/);
+});
+test('each service has its own embed container', () => {
+  assert.match(html, /id="cal-one-on-one"[^>]*data-cal-link="elizabeth-nolan-audvfc\/one-on-one"/);
+  assert.match(html, /id="cal-essayreview"[^>]*data-cal-link="elizabeth-nolan-audvfc\/essayreview"/);
+  assert.match(html, /data-pane="essayreview"[^>]*hidden/);
+});
+test('fallback links exist for both services', () => {
+  assert.match(html, /class="cal-fallback"[^>]*href="https:\/\/cal\.com\/elizabeth-nolan-audvfc\/one-on-one"/);
+  assert.match(html, /class="cal-fallback"[^>]*href="https:\/\/cal\.com\/elizabeth-nolan-audvfc\/essayreview"/);
+});
+test('all booking CTAs point to #book', () => {
+  assert.equal(count(/href="#contact"[^>]*>(Book|Book a session)</g), 0);
+  assert.ok(count(/href="#book"/g) >= 2);
+});
+test('no hard-coded turnaround', () => assert.doesNotMatch(html, /within \d+ days/i));
