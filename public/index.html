@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Consistent Tutoring: Winter Essay Help</title>
-<meta name="description" content="One-on-one college essay help on Zoom from a 20-year English teacher. Pick a time, book and pay online, and finish your essays before regular decision deadlines.">
+<meta name="description" content="One-on-one college essay help by video call from a 20-year English teacher. Pick a time, book and pay online, and finish your essays before regular decision deadlines.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Consistent Tutoring: College Essay Help on Zoom">
+<meta property="og:title" content="Consistent Tutoring: College Essay Help by Video Call">
 <meta property="og:description" content="One-on-one college essay help from a 20-year English teacher. Book and pay online.">
 <meta property="og:image" content="https://test.consistenttutoring.com/photo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,6 +132,12 @@ section { padding: 84px 0; }
 .cal-pane[hidden] { display: none; }
 .cal-embed { min-height: 560px; width: 100%; overflow: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
 .cal-help { font-size: .88rem; color: var(--muted); }
+.cal-gate { display: grid; gap: 10px; min-width: 0; }
+.cal-gate[hidden], .gate-msg[hidden] { display: none; }
+.gate-msg { padding: 22px; border: 1px dashed var(--rule); border-radius: 6px; color: var(--muted); text-align: center; background: var(--paper); }
+.school-ack { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); font-size: .95rem; }
+.school-ack input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--pen); cursor: pointer; }
+.school-ack label { cursor: pointer; }
 .cal-embed:empty { min-height: 0; border: 0; }
 .book-note { font-size: .95rem; color: var(--muted); padding: 12px 16px; border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; font-style: italic; }
 
@@ -185,7 +191,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
   <div class="wrap">
     <h1 class="brand">Consistent Tutoring</h1>
     <div class="mast-rule" aria-hidden="true"><span>❧</span></div>
-    <p class="mast-tag">College Essay Help for High School Seniors · On Zoom</p>
+    <p class="mast-tag">College Essay Help for High School Seniors · Online</p>
   </div>
 </header>
 <nav>
@@ -205,7 +211,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
     <div>
       <p class="eyebrow">Now booking · through mid-January</p>
       <h2 class="hero-title">Your story, told in <em>650 words or less.</em></h2>
-      <p class="lede">One-on-one help on Zoom for seniors finishing their college essays before regular decision deadlines. Book by the hour, with no package required.</p>
+      <p class="lede">One-on-one help by video call for seniors finishing their college essays before regular decision deadlines. Book by the hour, with no package required.</p>
       <div class="cta-row">
         <a class="btn btn-pen" href="#book">Book a session</a>
         <a class="btn btn-line" href="#help">See options &amp; prices</a>
@@ -245,7 +251,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
       <article class="prog feature">
         <div class="prog-top"><h3>One-on-One Session</h3><span class="tag">Most popular</span></div>
         <div class="price">$100 <small>/ hour</small></div>
-        <div class="meta"><span>On Zoom</span><span>Book as many as you need</span></div>
+        <div class="meta"><span>Online video call</span><span>Book as many as you need</span></div>
         <ul>
           <li>Personal statements, "why this college" essays and short answers</li>
           <li>Finding a topic, fixing structure, cutting to the word limit</li>
@@ -256,11 +262,11 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
       <article class="prog">
         <div class="prog-top"><h3>Essay Review</h3><span class="tag">Written feedback</span></div>
         <div class="price">$150 <small>/ essay</small></div>
-        <div class="meta"><span>Detailed comments</span><span>Plus a 30-minute Zoom call</span></div>
+        <div class="meta"><span>Detailed comments</span><span>Plus a 30-minute video call</span></div>
         <ul>
           <li>Send a finished or nearly finished essay</li>
           <li>Written comments on content, voice and clarity</li>
-          <li>A 30-minute Zoom call to talk through revisions</li>
+          <li>A 30-minute video call to talk through revisions</li>
           <li>Notes back before your call; book early near deadlines</li>
         </ul>
       </article>
@@ -276,17 +282,21 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
   <div class="wrap">
     <div class="section-head">
       <h2>Book in three steps</h2>
-      <p>Choose your help, pick a time that works, and pay securely. You'll get a confirmation and Zoom link right away.</p>
+      <p>Choose your help, pick a time that works, and pay securely. You'll get a confirmation and video call link right away.</p>
     </div>
     <ol class="book-flow">
       <li>
         <div class="step-body">
           <span class="step-title">Choose your help</span>
+          <div class="school-ack">
+            <input type="checkbox" id="school-ack">
+            <label for="school-ack"><b>Please confirm first:</b> I don't tutor students from the school where I teach. By checking this box, you confirm your student doesn't attend that school, and understand that if you book anyway, the session will be canceled and payment may not be refunded.</label>
+          </div>
           <div class="choices" role="group" aria-label="Choose a service">
             <button class="svc-choice" type="button" data-service="one-on-one" aria-pressed="true">
               <b>One-on-One Session</b>
               <span class="price">$100 <small>/ hour</small></span>
-              <span class="desc">Work through drafts together on Zoom</span>
+              <span class="desc">Work through drafts together by video call</span>
             </button>
             <button class="svc-choice" type="button" data-service="essayreview" aria-pressed="false">
               <b>Essay Review</b>
@@ -299,6 +309,9 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
       <li>
         <div class="step-body">
           <span class="step-title">Pick a time &amp; pay</span>
+          <p class="gate-msg" id="gate-msg">Check the box in step I to see open times.</p>
+          <noscript><p class="cal-help">Book directly: <a href="https://cal.com/elizabeth-nolan-audvfc/one-on-one">One-on-One Session</a> · <a href="https://cal.com/elizabeth-nolan-audvfc/essayreview">Essay Review</a></p></noscript>
+          <div class="cal-gate" id="cal-gate" hidden>
           <div class="cal-pane" data-pane="one-on-one">
             <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/one-on-one" target="_blank" rel="noopener">Open the booking page</a></p>
             <div class="cal-embed" id="cal-one-on-one" data-cal-link="elizabeth-nolan-audvfc/one-on-one"></div>
@@ -308,13 +321,13 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
             <p class="cal-help">Calendar not loading? <a class="cal-fallback" href="https://cal.com/elizabeth-nolan-audvfc/essayreview" target="_blank" rel="noopener">Open the booking page</a></p>
             <div class="cal-embed" id="cal-essayreview" data-cal-link="elizabeth-nolan-audvfc/essayreview"></div>
           </div>
+          </div>
         </div>
       </li>
       <li>
         <div class="step-body">
           <span class="step-title">You're set</span>
-          <span><b>Check your email.</b> Your confirmation has the Zoom link and a calendar invite. Need to change something? Reschedule or cancel from that email with at least 24 hours' notice; later cancellations count as a used session.</span>
-          <span>I don't tutor students from the school where I teach.</span>
+          <span><b>Check your email.</b> Your confirmation has the video call link (Cal Video, right in your browser, nothing to install) and a calendar invite. Need to change something? Reschedule or cancel from that email with at least 24 hours' notice; later cancellations count as a used session.</span>
         </div>
       </li>
     </ol>
@@ -328,7 +341,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
       <details><summary>Do you write or edit the essay for my student?</summary><p>No. Students write every word. I ask questions that get to what matters and give honest feedback on structure, voice and clarity. Admissions readers can tell when an adult wrote an essay.</p></details>
       <details><summary>Is it too late to get help?</summary><p>Not at all. Many students make their biggest improvements in the final weeks. Even one session can turn a decent essay into a strong one.</p></details>
       <details><summary>How many sessions will we need?</summary><p>It depends on how far along your student is. A polished draft may need one session. A student starting from scratch usually needs two or three.</p></details>
-      <details><summary>Are sessions online or in person?</summary><p>All sessions are on Zoom, so students can join from anywhere, even while traveling over winter break. We work in a shared Google Doc so we can look at the draft together and you can see my comments in real time.</p></details>
+      <details><summary>Are sessions online or in person?</summary><p>All sessions are online through Cal Video, which runs in the browser with nothing to install, so students can join from anywhere, even while traveling over winter break. We work in a shared Google Doc so we can look at the draft together and you can see my comments in real time.</p></details>
       <details><summary>How do I pay?</summary><p>By card when you book. Payment is handled securely by Stripe, and you'll get a receipt by email.</p></details>
       <details><summary>How fast is an essay review?</summary><p>The calendar only offers call times after your written notes will be ready, so pick any open time. Near deadlines, book early: spots fill quickly the week before January 1.</p></details>
       <details><summary>Can you help with scholarship essays too?</summary><p>Yes. I teach a course on college applications and scholarship essays, and sessions can cover those too.</p></details>
@@ -355,7 +368,7 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
 </main>
 
 <footer>
-  <div class="wrap">© 2026 Consistent Tutoring · College Essay Coaching · Sessions on Zoom</div>
+  <div class="wrap">© 2026 Consistent Tutoring · College Essay Coaching · Sessions online</div>
 </footer>
 
 <script>
@@ -376,13 +389,22 @@ footer { padding: 26px 0; font-size: .85rem; color: var(--muted); }
     });
     el.dataset.mounted = "1";
   };
+  const ack = document.getElementById('school-ack');
+  let current = 'one-on-one';
   const select = (service) => {
+    current = service;
     document.querySelectorAll('.svc-choice').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.service === service)));
     document.querySelectorAll('.cal-pane').forEach((p) => { p.hidden = p.dataset.pane !== service; });
-    mount(service);
+    if (ack.checked) mount(service);
+  };
+  const unlock = () => {
+    document.getElementById('cal-gate').hidden = !ack.checked;
+    document.getElementById('gate-msg').hidden = ack.checked;
+    if (ack.checked) mount(current);
   };
   document.querySelectorAll('.svc-choice').forEach((b) => b.addEventListener('click', () => select(b.dataset.service)));
-  mount('one-on-one');
+  document.getElementById('school-ack').addEventListener('change', unlock);
+  unlock();
 })();
 
 document.getElementById('copyBtn').addEventListener('click', async (e) => {

@@ -84,3 +84,21 @@ test('service cards reserve room for the check badge', () => {
   assert.match(html, /\.svc-choice \{[^}]*padding: 18px 48px 18px 20px/);
   assert.match(html, /\.svc-choice\[aria-pressed="true"\] \{[^}]*padding: 17px 47px 17px 19px/);
 });
+
+// School acknowledgement + Cal Video
+test('school notice comes before the calendar, with a checkbox', () => {
+  assert.match(html, /<input type="checkbox" id="school-ack"/);
+  assert.ok(html.indexOf('id="school-ack"') < html.indexOf('class="cal-embed"'));
+  assert.equal(count(/school where I teach/g), 1);
+});
+test('checkbox text warns payment may not be refunded', () =>
+  assert.match(html, /<label[^>]*for="school-ack"[\s\S]*?may not be refunded[\s\S]*?<\/label>/));
+test('calendar step is locked until the box is checked', () => {
+  assert.match(html, /<div class="cal-gate" id="cal-gate" hidden>/);
+  assert.match(html, /class="gate-msg"/);
+  assert.match(html, /getElementById\('school-ack'\)\.addEventListener\('change'/);
+});
+test('sessions are described as Cal Video, not Zoom', () => {
+  assert.doesNotMatch(html, /zoom/i);
+  assert.match(html, /Cal Video/);
+});
